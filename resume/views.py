@@ -20,3 +20,7 @@ def index(request):
 
         profile.save()    
     return render(request, "resume/index.html")
+
+def resume(request, id):
+    user_profile = ProfileFields.objects.get(id=id)
+    return render(request,'resume/resume.html',{'user_profile':user_profile})
