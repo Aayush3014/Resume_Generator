@@ -13,6 +13,20 @@
 <body>
 
     <div class="container">
+      <nav class="navbar navbar-expand-lg navbar font-weight-bold bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Resume Generator</a>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> -->
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'list' %}">All Resume <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
         <div class="row">
             <div class="col-md-8">
                 <form method="POST">
@@ -65,7 +79,7 @@
                         <textarea type="text" class="form-control" id="skills" name="skills"></textarea>
                       </div>
                    
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a type="submit" href="{% url 'list' %}" class="btn btn-success">Generate Resume</a>
                   </form>
             </div>
         </div>
