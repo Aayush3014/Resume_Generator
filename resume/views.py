@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from .models import ProfileFields
+import pdfkit
+from django.http import HttpResponse
+from django.template import loader
+import io
+
 # Create your views here.
 
 def index(request):
@@ -23,4 +28,16 @@ def index(request):
 
 def resume(request, id):
     user_profile = ProfileFields.objects.get(id=id)
-    return render(request,'resume/resume.html',{'user_profile':user_profile})
+    template = loader.get_template('resume/resume.html')
+    html = template.render({'user_profile':user_profile})
+    options = {
+        'page-size':'Letter',
+        'encoding':'UTF-8',
+    }
+
+    pdf = pdfkit.from_string(html,False,options)
+
+    response = HttpResponse(pdf,content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment'
+    filename = 'resume.pdf'
+    return response
